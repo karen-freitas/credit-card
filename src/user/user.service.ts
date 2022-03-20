@@ -18,6 +18,24 @@ export class UserService {
      return this.userRepository.save(userEntity)
   }
 
+  async verifyIfUserExists(email, cpf){
+    const foundUserByEmail = await this.findUserbyEmail(email)
+    const foundUserByCpf = await this.findUserbyCpf(cpf)
+
+   
+    return foundUserByCpf.length>0 || foundUserByEmail.length>0
+  }
+
+  private findUserbyEmail(email: string) {
+    return this.userRepository.find({email})
+
+  }
+
+  private findUserbyCpf(cpf: string) {
+    return this.userRepository.find({cpf})
+    
+  }
+
   private encryptPassword(password:string) {
     return bcrypt.hash(password, 10)
   }
