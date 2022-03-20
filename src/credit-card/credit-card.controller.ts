@@ -1,10 +1,10 @@
 import { CreditCardService } from './credit-card.service';
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-// import { IsPublic } from 'src/auth/is-public.decorator';
+import { IsPublic } from 'src/auth/is-public.decorator';
 import CreditCardRequestDTO from './types/credit-card-request.dto';
 
-// @IsPublic()
+@IsPublic()
 @ApiTags('Solicitation')
 @Controller('credit-card')
 export class CreditCardController {

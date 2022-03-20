@@ -11,6 +11,8 @@ import { CreditCardModule } from './credit-card/credit-card.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/jwt.auth.guard';
 
 @Module({
   imports: [
@@ -30,6 +32,6 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController, UserController, CreditCardController],
-  providers: [AppService, CreditCardService, UserService],
+  providers: [AppService, CreditCardService, UserService, { provide: APP_GUARD, useClass: JwtAuthGuard },],
 })
 export class AppModule {}
