@@ -1,3 +1,4 @@
+import { UserService } from 'src/user/user.service';
 import { Solicitation } from './solicitations.entity';
 import { User } from 'src/user/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,26 +11,19 @@ import SolicitationStatus from './enum/solicitation-status.enum';
 export class CreditCardService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-    @InjectRepository(Solicitation) private solicitationRepository: Repository<Solicitation>
-  
+    @InjectRepository(Solicitation)
+    private solicitationRepository: Repository<Solicitation>,
+    private userService: UserService,
   ) {}
+
   async createSolicitation(creditCardRequest: CreditCardRequestDTO) {
-   
-    // Criar usuário ok
-    // Criar solicitação do usuário ok 
-    // verificar aprovação do usuário
-    // ativar usuário caso seja aprovado
+    const user = await this.userService.createUser({
+      email: creditCardRequest.email,
+      name: creditCardRequest.name,
+      password: creditCardRequest.password,
+      cpf: creditCardRequest.cpf
 
-   
-    const user = await this.userRepository.save(
-      this.userRepository.create({
-        name:creditCardRequest.name,
-        cpf: creditCardRequest.cpf,
-        email: creditCardRequest.email,
-        password: creditCardRequest.password,
-      })
-    );
-
+    })
     const approved = this.isApproved()
 
     await this.solicitationRepository.save(
@@ -37,10 +31,8 @@ export class CreditCardService {
         preferredDueDay:creditCardRequest.preferredDueDay,
         user:user,
         status: approved ? SolicitationStatus.APPROVED: SolicitationStatus.DENIED
-      
-
       })
-    )
+    );
 
     return approved
 

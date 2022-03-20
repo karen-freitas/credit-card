@@ -1,3 +1,4 @@
+import { UserService } from 'src/user/user.service';
 import { CreditCardService } from './credit-card/credit-card.service';
 import { Solicitation } from './credit-card/solicitations.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -27,6 +28,6 @@ import { User } from './user/user.entity';
     UserModule,
   ],
   controllers: [AppController, UserController, CreditCardController],
-  providers: [AppService, CreditCardService],
+  providers: [AppService, CreditCardService, UserService],
 })
 export class AppModule {}
