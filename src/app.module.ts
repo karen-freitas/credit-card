@@ -10,6 +10,7 @@ import { CreditCardController } from './credit-card/credit-card.controller';
 import { CreditCardModule } from './credit-card/credit-card.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { User } from './user/user.entity';
     }),
     CreditCardModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController, UserController, CreditCardController],
   providers: [AppService, CreditCardService, UserService],

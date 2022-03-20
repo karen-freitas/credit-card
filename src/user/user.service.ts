@@ -40,5 +40,9 @@ export class UserService {
     return bcrypt.hash(password, 10)
   }
 
+  async findUser (email:string) {
+    return this.userRepository.findOne({email})
+  }
+
 
 }
