@@ -1,4 +1,4 @@
-// import UserStatus from '../enum/user-status.enum';
+import UserStatus from '../enum/user-status.enum';
 
 class UserDTO {
   name: string;
@@ -7,8 +7,9 @@ class UserDTO {
 
   email: string;
 
-  cpf: string;
+  cpf:string;
 
+  status: UserStatus;
 }
 
 export default UserDTO;

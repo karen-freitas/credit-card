@@ -13,6 +13,8 @@ import { User } from './user/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt.auth.guard';
+import { TransactionModule } from './transaction/transaction.module';
+import CreditCard from './credit-card/credit-card.entity';
 
 @Module({
   imports: [
@@ -23,13 +25,14 @@ import { JwtAuthGuard } from './auth/jwt.auth.guard';
       username: 'root',
       password: 'password',
       database: 'mysql',
-      entities: [User, Solicitation],
+      entities: [User, Solicitation, CreditCard],
       synchronize: true,
     
     }),
     CreditCardModule,
     UserModule,
     AuthModule,
+    TransactionModule,
   ],
   controllers: [AppController, UserController, CreditCardController],
   providers: [AppService, CreditCardService, UserService, { provide: APP_GUARD, useClass: JwtAuthGuard },],

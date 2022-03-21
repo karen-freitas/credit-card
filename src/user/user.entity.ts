@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-// import UserStatus from './enum/user-status.enum';
+import UserStatus from './enum/user-status.enum';
 
 @Entity({name:'User', schema:'public'})
 export class User {
@@ -18,6 +18,6 @@ export class User {
   @Column({unique:true})
   cpf: string;
 
-  // @Column()
-  // status: UserStatus;
+  @Column()
+  status: UserStatus;
 }
