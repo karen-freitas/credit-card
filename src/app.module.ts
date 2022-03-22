@@ -1,3 +1,4 @@
+import { Transaction } from 'src/transaction/transaction.entity'
 import { UserService } from 'src/user/user.service';
 import { CreditCardService } from './credit-card/credit-card.service';
 import { Solicitation } from './credit-card/solicitations.entity';
@@ -25,7 +26,7 @@ import CreditCard from './credit-card/credit-card.entity';
       username: 'root',
       password: 'password',
       database: 'mysql',
-      entities: [User, Solicitation, CreditCard],
+      entities: [User, Solicitation, CreditCard, Transaction],
       synchronize: true,
     
     }),

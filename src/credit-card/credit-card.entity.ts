@@ -1,4 +1,4 @@
-// import Transaction from 'src/transaction/transaction.entity';
+import {Transaction} from 'src/transaction/transaction.entity';
 import { User } from 'src/user/user.entity';
 import {
   Column,
@@ -25,8 +25,7 @@ class CreditCard {
   number: string;
 
   @Column({ default: Brands.VISA })
-  // brand: Brands;
-  brand:string;
+  brand: Brands;
 
 
   @Column({ type: 'timestamp' })
@@ -39,8 +38,8 @@ class CreditCard {
   @OneToOne(() => User)
   user: User;
 
-  // @OneToMany(() => Transaction, (transaction) => transaction.credit_card)
-  // transactions: Transaction[];
+  @OneToMany(() => Transaction, (transaction) => transaction.credit_card)
+  transactions: Transaction[];
 }
 
 export default CreditCard;
