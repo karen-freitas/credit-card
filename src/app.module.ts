@@ -18,7 +18,10 @@ import { TransactionModule } from './transaction/transaction.module';
 import { StatementModule } from './statement/statement.module';
 import { BalanceService } from './balance/balance.service';
 import { BalanceModule } from './balance/balance.module';
+import { BillModule } from './bill/bill.module';
 import CreditCard from './credit-card/credit-card.entity';
+import { Bill } from './bill/bill.entity';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -29,7 +32,7 @@ import CreditCard from './credit-card/credit-card.entity';
       username: 'root',
       password: 'password',
       database: 'mysql',
-      entities: [User, Solicitation, CreditCard, Transaction],
+      entities: [User, Solicitation, CreditCard, Transaction, Bill],
       synchronize: true,
     
     }),
@@ -39,6 +42,8 @@ import CreditCard from './credit-card/credit-card.entity';
     TransactionModule,
     StatementModule,
     BalanceModule,
+    BillModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController, UserController, CreditCardController],
   providers: [AppService, CreditCardService, UserService, { provide: APP_GUARD, useClass: JwtAuthGuard }, BalanceService,],
